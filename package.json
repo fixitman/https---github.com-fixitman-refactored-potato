@@ -1,0 +1,29 @@
+{
+  "name": "list-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd frontend && vite --open",
+    "server": "nodemon .",
+    "dev": "concurrently \"npm run client\" \"npm run server\" "
+  },
+  "author": "Mike Collins",
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "express-session-sequelize": "^2.3.0",
+    "jsonwebtoken": "^9.0.0",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.28.0",
+    "simple-csrf": "^1.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "sequelize-cli": "^6.5.2"
+  }
+}
