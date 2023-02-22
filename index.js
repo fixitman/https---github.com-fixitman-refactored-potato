@@ -41,8 +41,9 @@ app.use((req,res,next)=>{
 
 
 app.use('/auth', require('./routes/authRoutes'))
+app.use('/list', require ('./routes/listRoutes'))
 
-app.use('/login', (req,res)=>{res.send('Login Page')})
+//app.use('/login', (req,res)=>{res.send('Login Page')})
 
 app.use( express.static(path.join(__dirname, 'frontend', 'build')))
 app.get ('/', (req,res)=>{res.sendFile(path.join(__dirname,'frontend','build','index.html'))})
