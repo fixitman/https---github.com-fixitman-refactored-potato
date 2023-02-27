@@ -7,11 +7,16 @@ const createList = async (req, res, next) => {
         return res.sendStatus(401);
     }
 
+    if(!req.body?.title){
+        console.log('no title')
+        return res.sendStatus(400)
+    }
+
     const t = await sequelize.transaction();
 
     try {
         const newList = await List.create({
-            title: 'List Title'
+            title: req.body.title
         }, { transaction: t })
 
         const newRole = await Role.create({
@@ -26,7 +31,7 @@ const createList = async (req, res, next) => {
 
     } catch (error) {
         await t.rollback();
-        console.log('Create Failed')
+        console.log('Create Failed', error)
     }
 }
 

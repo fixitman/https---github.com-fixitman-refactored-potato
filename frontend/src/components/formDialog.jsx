@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function FormDialog({callback}) {
   const [open, setOpen] = React.useState(false);
-  const emailRef = React.useRef()
+  const emailRef = React.useRef(null)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,7 +27,7 @@ export default function FormDialog({callback}) {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
+        Create new list
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Subscribe</DialogTitle>
@@ -45,6 +45,7 @@ export default function FormDialog({callback}) {
             fullWidth
             variant="standard"
             inputRef={emailRef}
+            autoComplete="off"
           />
         </DialogContent>
         <DialogActions>
