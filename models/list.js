@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     List.associate = (models) => {
-        List.belongsToMany(models.User, {through: models.Role})
+        List.belongsToMany(models.User, {through: models.Role, onDelete: 'cascade'})
     }
     
     return List
