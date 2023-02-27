@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function FormDialog({callback}) {
   const [open, setOpen] = React.useState(false);
-  const emailRef = React.useRef(null)
+  const titleRef = React.useRef(null)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -20,7 +20,7 @@ export default function FormDialog({callback}) {
   };
 
   const handleSubscribe = () => {
-    callback(emailRef.current.value)
+    callback(titleRef.current.value)
     handleClose()
   }
 
@@ -30,21 +30,20 @@ export default function FormDialog({callback}) {
         Create new list
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>New List</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
+            Enter a title for your new list. You can call it whatever you want.
           </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
             id="name"
-            label="Email Address"
-            type="email"
+            label="Title"
+            type="text"
             fullWidth
             variant="standard"
-            inputRef={emailRef}
+            inputRef={titleRef}
             autoComplete="off"
           />
         </DialogContent>
