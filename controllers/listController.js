@@ -1,4 +1,5 @@
 const { User, List, Role, sequelize } = require('../models')
+const { Op } = require('sequelize')
 
 const createList = async (req, res, next) => {
     const user = req.session.user
@@ -7,7 +8,7 @@ const createList = async (req, res, next) => {
         return res.sendStatus(401);
     }
 
-    if(!req.body?.title){
+    if (!req.body?.title) {
         console.log('no title')
         return res.sendStatus(400)
     }
@@ -43,8 +44,8 @@ const getLists = async (req, res, next) => {
     }
 
     const lists = await List.findAll({
-        attributes: ['title'],
-        order:[['createdAt','desc']],
+        attributes: ['id', 'title'],
+        order: [['createdAt', 'desc']],
         required: true,
         include: {
             model: User,
@@ -55,7 +56,7 @@ const getLists = async (req, res, next) => {
             through: {
                 attributes: [],
                 where: {
-                    role: 'OWNER'
+                    role: { [Op.or]: ['OWNER', 'EDITOR'] }
                 }
             }
         },

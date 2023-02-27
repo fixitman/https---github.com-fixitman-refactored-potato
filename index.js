@@ -41,7 +41,7 @@ app.use((req,res,next)=>{
 
 
 app.use('/auth', require('./routes/authRoutes'))
-app.use('/list', require ('./routes/listRoutes'))
+app.use('/list', requireAuth, require ('./routes/listRoutes'))
 
 //app.use('/login', (req,res)=>{res.send('Login Page')})
 

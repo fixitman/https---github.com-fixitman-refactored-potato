@@ -30,7 +30,7 @@ const HiPage = () => {
     await axios.post('list/create', { title })
       .then((response) => {
         console.log('created', JSON.stringify(response.data, null, 2))
-        setLists([...lists, response.data.title])
+        setLists([ response.data.title, ...lists])
       })
       .catch((e) => {
         console.log('Error', e.message)
