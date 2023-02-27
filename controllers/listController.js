@@ -22,7 +22,7 @@ const createList = async (req, res, next) => {
 
         await t.commit();
 
-        res.sendStatus(200)
+        res.json(newList)
 
     } catch (error) {
         await t.rollback();
