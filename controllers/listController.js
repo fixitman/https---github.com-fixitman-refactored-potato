@@ -44,6 +44,7 @@ const getLists = async (req, res, next) => {
 
     const lists = await List.findAll({
         attributes: ['title'],
+        order:[['createdAt','desc']],
         required: true,
         include: {
             model: User,
