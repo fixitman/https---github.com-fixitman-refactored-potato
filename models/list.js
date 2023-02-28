@@ -16,9 +16,10 @@ module.exports = (sequelize, DataTypes) => {
 
     List.associate = (models) => {
         List.belongsToMany(models.User, {through: models.Role, onDelete: 'cascade'})
+        List.hasMany(models.ListItem, {onDelete: 'cascade'})
     }
     
-    return List
+    return List  
 
 
 }
