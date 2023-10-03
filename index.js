@@ -45,8 +45,8 @@ app.use('/list', requireAuth, require ('./routes/listRoutes'))
 
 //app.use('/login', (req,res)=>{res.send('Login Page')})
 
-app.use( express.static(path.join(__dirname, 'frontend', 'build')))
-app.get ('/', (req,res)=>{res.sendFile(path.join(__dirname,'frontend','build','index.html'))})
+app.use( express.static(path.join(__dirname, 'frontend', 'dist')))
+app.get ('/', (req,res)=>{res.sendFile(path.join(__dirname,'frontend','dist','index.html'))})
 
 
 //error handler
