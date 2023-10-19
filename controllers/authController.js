@@ -82,7 +82,7 @@ const logout = (req, res, next) => {
 
 const requireAuth = (req, res, next) => {
     if (!req.session || !req.session.user) {
-        return res.redirect('/auth/login')
+        return res.status(401);
     }
     next()
 }
