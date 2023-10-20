@@ -93,8 +93,12 @@ const requireAuth = (req, res, next) => {
 }
 
 const getUser = (req, res) => {
-    let ret = req.session?.user ? req.session.user : null
-    res.json({ user: ret })
+    console.log(req.session)
+    let ret = req.session?.user ? 
+        {   user: req.session.user,
+            csrfToken : req.session.simpleCsrfToken
+        } : null
+    res.json(ret)
 }
 
 
