@@ -3,6 +3,8 @@ const { Op } = require('sequelize')
 
 const createList = async (req, res, next) => {
     const user = req.session.user
+    const newList = null
+
     if (!user) {
         console.log('no user')
         return res.sendStatus(401);
@@ -16,24 +18,24 @@ const createList = async (req, res, next) => {
     const t = await sequelize.transaction();
 
     try {
-        const newList = await List.create({
+        newList = await List.create({
             title: req.body.title
         }, { transaction: t })
 
-        const newRole = await Role.create({
+        await Role.create({
             role: 'OWNER',
             UserId: user.id,
             ListId: newList.id
         }, { transaction: t })
 
         await t.commit();
-
-        res.json(newList)
-
+       
     } catch (error) {
         await t.rollback();
         console.log('Create Failed', error)
+        res.sendStatus(500)
     }
+    res.json(newList)
 }
 
 const getLists = async (req, res, next) => {
@@ -46,10 +48,10 @@ const getLists = async (req, res, next) => {
     const lists = await List.findAll({
         attributes: ['id', 'title'],
         order: [['createdAt', 'desc']],
-        required: true,
         include: {
             model: User,
-            attributes: ['username'],
+            required: true,
+            attributes: [],
             where: {
                 id: user.id
             },
