@@ -29,7 +29,7 @@ app.use(session({
         httpOnly: true
     }
 }))
-//app.use(csrf())
+app.use(csrf())
 
 //logger
 app.use((req,res,next)=>{
