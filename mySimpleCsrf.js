@@ -5,8 +5,8 @@
 var crypto = require('crypto');
 var scmp = require('scmp');
 
-module.exports = function() {
-  return function simpleCsrf(req, res, next) {
+module.exports = 
+  function simpleCsrf(req, res, next) {
 
     // This won't work without sessions
     if(!req.session){
@@ -27,7 +27,8 @@ module.exports = function() {
     res.locals.csrfToken = token;
 
     // Validate
-    if (req.method != 'GET' && req.method != 'HEAD' && req.method != 'OPTIONS') {
+    // auth/login doesn't need to be checked
+    if (req.method != 'GET' && req.method != 'HEAD' && req.method != 'OPTIONS' && req.path != '/auth/login') {
       var submittedToken = (req.body?._csrf_token) || (req.headers['x-csrf-token']);
       if (!scmp(submittedToken, token)) {
         var error = new Error('Invalid CSRF token.');
@@ -37,5 +38,4 @@ module.exports = function() {
     }
     
     next();
-  }
-};
+  };

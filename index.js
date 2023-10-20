@@ -4,6 +4,7 @@ const sequelize = require('./db')
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const { requireAuth } = require('./controllers/authController')
+const cors = require('cors')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -17,6 +18,7 @@ const csrf = require('./mySimpleCsrf')
 
 //middleware
 
+app.use(cors())
 app.use(cookieParser())
 app.use(express.json())
 app.use(session({
@@ -29,7 +31,8 @@ app.use(session({
         httpOnly: true
     }
 }))
-app.use(csrf())
+
+app.use(csrf)
 
 //logger
 app.use((req,res,next)=>{

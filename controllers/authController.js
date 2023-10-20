@@ -19,13 +19,18 @@ const login = async (req, res, next) => {
             return res.sendStatus(401)
         }
 
-        user.pwHash = undefined
-        user.createdAt = undefined
-        user.updatedAt = undefined
-
-        req.session.user = user
-
-        res.status(200).json(user)
+        let retObj = {
+            user:{
+                id: user.id,
+                email: user.email,
+                username: user.username
+            },
+            csrfToken: req.csrfToken
+        }
+        
+        req.session.user = retObj.user        
+        
+        res.status(200).json(retObj)
     } catch (error) {
         next(error)
     }
@@ -82,7 +87,7 @@ const logout = (req, res, next) => {
 
 const requireAuth = (req, res, next) => {
     if (!req.session || !req.session.user) {
-        return res.status(401);
+        return res.sendStatus(401);
     }
     next()
 }
